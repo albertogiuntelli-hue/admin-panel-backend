@@ -1,17 +1,12 @@
-// backend/config/db.js
-
-import pkg from "pg";
-import dotenv from "dotenv";
-
-dotenv.config();
-
+import pkg from 'pg';
 const { Pool } = pkg;
 
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
+export const pool = new Pool({
+    connectionString: "postgresql://postgres:pZjNycUjYflqIBntrSKpLcjJzIRBYugU@nozomi.proxy.rlwy.net:40101/railway",
     ssl: {
+        require: true,
         rejectUnauthorized: false
     }
 });
 
-export default pool;
+export const query = (text, params) => pool.query(text, params);
